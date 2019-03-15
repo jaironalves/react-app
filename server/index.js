@@ -12,7 +12,6 @@ app.use('/', routes)
 const port = process.env.PORT || '3000'
 app.set('port', port)
 
-
 const server = Http.createServer(app)
 
 // eslint-disable-next-line no-console
