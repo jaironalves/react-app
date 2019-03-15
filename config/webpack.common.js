@@ -28,7 +28,7 @@ export default (options) => {
         plugins: [
             new HtmlWebpackPlugin({
                 title: 'React App',
-                template: './public/index.html',
+                template: 'src/public/index.html',
                 filename: './index.html'
             }),
             new CopyWebpackPlugin([{ from: 'src/assets' }])

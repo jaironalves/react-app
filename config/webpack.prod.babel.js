@@ -19,17 +19,17 @@ const optionsCommon = ({
     }
 })
 
-export default Merge(Common(optionsCommon), {        
+export default Merge(Common(optionsCommon), {
     output: {
         filename: '[name].bundle.js',
-        path: Path.resolve(__dirname, 'dist'),
+        path: Path.resolve(__dirname, '../dist'),
     },
     optimization: {
         minimizer: [new UglifyJsPlugin()]
-    },    
+    },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist'], { root: Path.resolve(__dirname, '..') }),
         new MiniCssExtractPlugin(),
-        new OptimizeCssAssetsPlugin()        
+        new OptimizeCssAssetsPlugin()
     ]
 })

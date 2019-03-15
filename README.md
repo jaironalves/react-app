@@ -1,2 +1,2 @@
 # react-app
-Application using react
+Boilerplate de React using Babel
