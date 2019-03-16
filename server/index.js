@@ -1,13 +1,14 @@
 import Express from 'express'
 import Path from 'path'
 import Http from 'http'
-import routes from './routes'
+import Routes from './routes'
 
 const app = Express()
 
-app.use('/', Express.static(Path.join(__dirname, '..', 'dist')))
-app.use('/dist', Express.static(Path.join(__dirname, '..', 'dist')))
-app.use('/', routes)
+const rootPath = Path.join(__dirname, '..', 'dist/public')
+
+app.use('/', Express.static(rootPath))
+app.use('/', Routes(rootPath))
 
 const port = process.env.PORT || '3000'
 app.set('port', port)

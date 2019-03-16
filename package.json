@@ -1,10 +1,9 @@
 {
   "scripts": {
-    "prebuild": "webpack --config config/webpack.prod.babel.js --progress",
+    "prebuild": "webpack --config src/config/webpack.config.prod.babel.js --progress",
     "build": "babel-node server",
-    "start": "webpack-dev-server --config config/webpack.dev.babel.js",
-    "lint": "eslint --ext .jsx --ext .js src",
-    "server": "BABEL_ENV=server babel-node server"
+    "start": "webpack-dev-server --config src/config/webpack.config.dev.babel.js",
+    "lint": "eslint --ext .jsx --ext .js src"    
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
