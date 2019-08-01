@@ -1,6 +1,6 @@
 import Merge from 'webpack-merge'
 import Common from './webpack.common.js'
-import Path from 'path'
+import paths from './paths'
 
 // Plugins
 import CleanWebpackPlugin from 'clean-webpack-plugin'
@@ -9,7 +9,7 @@ import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 
-const namePattern = '[name]-[hash:8]';
+const namePattern = '[name]-[hash:8]'
 
 const optionsCommon = {
   mode: 'production',
@@ -23,19 +23,20 @@ const optionsCommon = {
   },
 }
 
-const rootDir = Path.resolve(__dirname, '../..')
-const distPath = 'dist/public'
-
 export default Merge(Common(optionsCommon), {
+  devtool: 'source-map',
   output: {
-    filename: namePattern + '.js',
-    path: Path.resolve(rootDir, distPath),
+    filename: `${paths.jsFolder}/${namePattern}.js`,
+    path: paths.outputPath,
+    chunkFilename: '[name].[chunkhash].js',
   },
   optimization: {
     minimizer: [new UglifyJsPlugin()],
   },
   plugins: [
-    new CleanWebpackPlugin([distPath], { root: rootDir }),
+    new CleanWebpackPlugin([paths.outputPath.split('/').pop()], {
+      root: paths.root,
+    }),
     new MiniCssExtractPlugin({
       filename: namePattern + '.css',
     }),

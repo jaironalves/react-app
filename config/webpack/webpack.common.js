@@ -1,9 +1,12 @@
+import Webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import Merge from 'webpack-merge'
+import paths from './paths'
 
 export default options =>
   Merge({
-    mode: options.mode,    
+    mode: options.mode,
+    entry: paths.entryPath,
     module: {
       rules: [
         {
@@ -17,13 +20,22 @@ export default options =>
         },
         {
           test: /\.(pdf|jpg|png|gif|svg|ico)$/,
-          use: [options.fileLoader]          
+          use: [options.fileLoader],
         },
       ],
     },
     plugins: [
+      new Webpack.ProgressPlugin(),
       new HtmlWebpackPlugin({
-        template: 'src/index.html'
+        template: paths.templatePath,
+        minify: {
+          collapseInlineTagWhitespace: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: true,
+          minifyURLs: true,
+          removeComments: true,
+          removeAttributeQuotes: true,
+        },
       }),
     ],
   })

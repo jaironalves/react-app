@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "prebuild": "webpack --config src/config/webpack.config.prod.babel.js --progress",
+    "prebuild": "webpack --config config/webpack/webpack.config.prod.babel.js --progress",
     "build": "babel-node server",
-    "start": "webpack-dev-server --config src/config/webpack.config.dev.babel.js",
+    "start": "webpack-dev-server --config config/webpack/webpack.config.dev.babel.js",
     "lint": "eslint --ext .jsx --ext .js src"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2",
+    "webpack-jarvis": "^0.3.2",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
