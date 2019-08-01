@@ -7,6 +7,12 @@ export default options =>
   Merge({
     mode: options.mode,
     entry: paths.entryPath,
+    output: {
+      filename: `${paths.jsFolder}/${options.namePattern}.js`,
+      path: paths.outputPath,
+      chunkFilename: `${paths.jsFolder}/${options.namePattern}.[chunkhash].js`,
+      publicPath: '/',
+    },
     module: {
       rules: [
         {

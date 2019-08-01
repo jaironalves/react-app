@@ -3,7 +3,7 @@ import Common from './webpack.common.js'
 import paths from './paths'
 
 // Plugins
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
@@ -13,6 +13,7 @@ const namePattern = '[name]-[hash:8]'
 
 const optionsCommon = {
   mode: 'production',
+  namePattern,
   cssStyleLoader: MiniCssExtractPlugin.loader,
   fileLoader: {
     loader: 'file-loader',
@@ -25,18 +26,11 @@ const optionsCommon = {
 
 export default Merge(Common(optionsCommon), {
   devtool: 'source-map',
-  output: {
-    filename: `${paths.jsFolder}/${namePattern}.js`,
-    path: paths.outputPath,
-    chunkFilename: '[name].[chunkhash].js',
-  },
   optimization: {
     minimizer: [new UglifyJsPlugin()],
   },
   plugins: [
-    new CleanWebpackPlugin([paths.outputPath.split('/').pop()], {
-      root: paths.root,
-    }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: namePattern + '.css',
     }),

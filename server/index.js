@@ -5,7 +5,7 @@ import Routes from './routes'
 
 const app = Express()
 
-const rootPath = Path.join(__dirname, '..', 'dist/public')
+const rootPath = Path.join(__dirname, '..', 'dist/')
 
 app.use('/', Express.static(rootPath))
 app.use('/', Routes(rootPath))

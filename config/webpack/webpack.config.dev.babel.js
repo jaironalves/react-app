@@ -6,6 +6,7 @@ import paths from './paths'
 
 const optionsCommon = {
   mode: 'development',
+  namePattern: '[name]',
   cssStyleLoader: 'style-loader',
   fileLoader: {
     loader: 'url-loader',
@@ -14,11 +15,6 @@ const optionsCommon = {
 
 export default Merge(Common(optionsCommon), {
   devtool: 'inline-source-map',
-  output: {
-    filename: '[name].js',
-    path: paths.outputPath,
-    chunkFilename: '[name].js',
-  },
   performance: {
     hints: 'warning',
     maxAssetSize: 20000000,
