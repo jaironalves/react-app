@@ -21,8 +21,18 @@ export default options =>
           use: ['babel-loader', 'eslint-loader'],
         },
         {
-          test: /\.(sa|sc|c)ss$/,
-          use: [options.cssStyleLoader, 'css-loader', 'sass-loader'],
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [options.styleLoaderInitial, 'css-loader', 'postcss-loader'],
+        },
+        {
+          test: /\.(sa|sc)ss$/,
+          use: [
+            options.styleLoaderInitial,
+            'css-loader',
+            'postcss-loader',
+            'sass-loader',
+          ],
         },
         {
           test: /\.(pdf|jpg|png|gif|svg|ico)$/,

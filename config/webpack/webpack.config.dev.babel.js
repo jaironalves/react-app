@@ -1,13 +1,12 @@
 import Common from './webpack.common.js'
 import Merge from 'webpack-merge'
 import Webpack from 'webpack'
-import Jarvis from 'webpack-jarvis'
 import paths from './paths'
 
 const optionsCommon = {
   mode: 'development',
   namePattern: '[name]',
-  cssStyleLoader: 'style-loader',
+  styleLoaderInitial: 'style-loader',
   fileLoader: {
     loader: 'url-loader',
   },
@@ -34,10 +33,5 @@ export default Merge(Common(optionsCommon), {
     hot: true,
     historyApiFallback: true,
   },
-  plugins: [
-    new Webpack.HotModuleReplacementPlugin(),
-    new Jarvis({
-      port: 1337,
-    }),
-  ],
+  plugins: [new Webpack.HotModuleReplacementPlugin()],
 })
