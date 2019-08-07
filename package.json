@@ -1,18 +1,29 @@
 {
+  "name": "react-app",
+  "description": "Boilerplate de React using Babel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaironalves/react-app.git"
+  },
+  "author": "Jairon Alves Lima",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaironalves/react-app/issues"
+  },
+  "homepage": "https://github.com/jaironalves/react-app#readme",
   "scripts": {
-    "prebuild": "webpack --config config/webpack/webpack.config.prod.babel.js --progress",
-    "build": "babel-node server",
-    "start": "webpack-dev-server --config config/webpack/webpack.config.dev.babel.js",
+    "prebuild": "webpack --config webpack/webpack.config.prod.babel.js --progress",
+    "build": "node server",
+    "start": "webpack-dev-server --config webpack/webpack.config.dev.babel.js",
     "lint": "eslint --ext .jsx --ext .js src"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.6.1",
+    "@babel/register": "^7.5.5",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
@@ -37,7 +48,6 @@
     "webpack": "^4.38.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2",
-    "webpack-jarvis": "^0.3.2",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {

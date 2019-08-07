@@ -1,5 +1,5 @@
 import Merge from 'webpack-merge'
-import Common from './webpack.common.js'
+import Common from './webpack.common.js.js'
 import Path from 'path'
 
 // Plugins

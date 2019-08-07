@@ -1,10 +1,9 @@
-import Path from 'path'
+var Path = require('path')
 
-export default (rootPath) => {
-
+module.exports = rootPath => {
   const router = require('express').Router()
 
-  router.get('*', (req, res) => {
+  router.get('*', (_req, res) => {
     const route = Path.join(rootPath, 'index.html')
     res.sendFile(route)
   })

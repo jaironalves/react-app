@@ -1,7 +1,7 @@
-import Express from 'express'
-import Path from 'path'
-import Http from 'http'
-import Routes from './routes'
+var Express = require('express')
+var Path = require('path')
+var Http = require('http')
+var Routes = require('./routes')
 
 const app = Express()
 
