@@ -87,7 +87,15 @@ export default options =>
             },
             {
               exclude: [/\.js$/, /\.html$/, /\.json$/],
-              use: ['file-loader'],
+              use: [
+                {
+                  loader: 'file-loader',
+                  options: {
+                    name: options.namePattern + '.[ext]',
+                    outputPath: 'assets',
+                  },
+                },
+              ],
             },
           ],
         },
