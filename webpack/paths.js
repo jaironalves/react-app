@@ -4,6 +4,7 @@ export default {
   root: path.resolve(__dirname, '../'),
   outputPath: path.resolve(__dirname, '../', 'dist'),
   entryPath: path.resolve(__dirname, '../', 'src/index.js'),
+  publicPath: path.resolve(__dirname, '../', 'src/public'),
   templatePath: path.resolve(__dirname, '../', 'src/public/index.html'),
   imagesFolder: 'images',
   fontsFolder: 'fonts',

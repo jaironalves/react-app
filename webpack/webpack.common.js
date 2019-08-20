@@ -1,7 +1,27 @@
 import Webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ManifestPlugin from 'webpack-manifest-plugin'
+import InterpolateHtmlPlugin from 'interpolate-html-plugin'
 import Merge from 'webpack-merge'
 import paths from './paths'
+
+const HtmlWebpackPluginAdditionalOptions = mode =>
+  mode !== 'development'
+    ? {
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true,
+        },
+      }
+    : undefined
 
 export default options =>
   Merge({
@@ -42,15 +62,30 @@ export default options =>
     },
     plugins: [
       new Webpack.ProgressPlugin(),
-      new HtmlWebpackPlugin({
-        template: paths.templatePath,
-        minify: {
-          collapseInlineTagWhitespace: true,
-          collapseWhitespace: true,
-          preserveLineBreaks: true,
-          minifyURLs: true,
-          removeComments: true,
-          removeAttributeQuotes: true,
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            template: paths.templatePath,
+          },
+          HtmlWebpackPluginAdditionalOptions(options.mode)
+        )
+      ),
+      new InterpolateHtmlPlugin({
+        PUBLIC_URL: '',
+      }),
+      new ManifestPlugin({
+        fileName: 'asset-manifest.json',
+        publicPath: '/',
+        generate: (seed, files) => {
+          const manifestFiles = files.reduce(function(manifest, file) {
+            manifest[file.name] = file.path
+            return manifest
+          }, seed)
+
+          return {
+            files: manifestFiles,
+          }
         },
       }),
     ],

@@ -31,6 +31,14 @@ export default Merge(Common(optionsCommon), {
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
   },
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 20000000,
+    maxEntrypointSize: 8500000,
+    assetFilter: assetFilename => {
+      return assetFilename.endsWith('.css') || assetFilename.endsWith('.js')
+    },
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
@@ -38,6 +46,12 @@ export default Merge(Common(optionsCommon), {
       chunkFilename: '[id].css',
     }),
     new OptimizeCssAssetsPlugin(),
-    new CopyWebpackPlugin([{ from: 'src/files', to: 'assets' }]),
+    new CopyWebpackPlugin([
+      {
+        from: paths.publicPath,
+        to: paths.outputPath,
+        ignore: [paths.templatePath],
+      },
+    ]),
   ],
 })
