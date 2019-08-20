@@ -1,7 +1,6 @@
 import React from 'react'
 import { render as ReactDOMRender } from 'react-dom'
-//import App from './App'
-import App from './routerdom'
+import App from './App'
 
 import './styles.sass'
 

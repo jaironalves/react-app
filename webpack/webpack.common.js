@@ -34,29 +34,62 @@ export default options =>
       publicPath: '/',
     },
     module: {
+      strictExportPresence: true,
       rules: [
+        { parser: { requireEnsure: false } },
         {
           test: /\.js$/,
-          exclude: /node_modules/,
-          use: ['babel-loader', 'eslint-loader'],
-        },
-        {
-          test: /\.css$/,
-          exclude: /node_modules/,
-          use: [options.styleLoaderInitial, 'css-loader', 'postcss-loader'],
-        },
-        {
-          test: /\.(sa|sc)ss$/,
+          include: paths.srcPath,
+          enforce: 'pre',
           use: [
-            options.styleLoaderInitial,
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
+            {
+              loader: 'eslint-loader',
+              options: {
+                eslintPath: require.resolve('eslint'),
+                resolvePluginsRelativeTo: __dirname,
+              },
+            },
           ],
         },
         {
-          test: /\.(pdf|jpg|png|gif|svg|ico)$/,
-          use: [options.fileLoader],
+          oneOf: [
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: [
+                {
+                  loader: require.resolve('url-loader'),
+                  options: {
+                    limit: 10000,
+                    name: `assets/${options.namePattern}.[ext]`,
+                  },
+                },
+              ],
+            },
+            {
+              test: /\.js$/,
+              include: paths.srcPath,
+              exclude: /node_modules/,
+              use: ['babel-loader'],
+            },
+            {
+              test: /\.css$/,
+              exclude: /node_modules/,
+              use: [options.styleLoaderInitial, 'css-loader', 'postcss-loader'],
+            },
+            {
+              test: /\.(sa|sc)ss$/,
+              use: [
+                options.styleLoaderInitial,
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+              ],
+            },
+            {
+              exclude: [/\.js$/, /\.html$/, /\.json$/],
+              use: ['file-loader'],
+            },
+          ],
         },
       ],
     },

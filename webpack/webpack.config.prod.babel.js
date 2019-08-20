@@ -17,13 +17,6 @@ const optionsCommon = {
   mode: 'production',
   namePattern,
   styleLoaderInitial: MiniCssExtractPlugin.loader,
-  fileLoader: {
-    loader: 'file-loader',
-    options: {
-      name: namePattern + '.[ext]',
-      outputPath: 'assets',
-    },
-  },
 }
 
 export default Merge(Common(optionsCommon), {

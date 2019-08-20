@@ -7,9 +7,6 @@ const optionsCommon = {
   mode: 'development',
   namePattern: '[name]',
   styleLoaderInitial: 'style-loader',
-  fileLoader: {
-    loader: 'url-loader',
-  },
 }
 
 export default Merge(Common(optionsCommon), {
